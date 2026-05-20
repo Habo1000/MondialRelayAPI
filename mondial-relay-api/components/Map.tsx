@@ -3,7 +3,8 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { parsePointRelais } from "@/lib/parse";
+import { parsePointRelais, formatDayLabel } from "@/lib/parse";
+import { daysOfWeek } from "@/lib/days";
 
 const defaultIcon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
@@ -13,11 +14,6 @@ const defaultIcon = L.icon({
 });
 
 export default function Map({ results }: { results: any }) {
-  // const navResults =
-  //   results?.["soap:Envelope"]?.children?.[0]?.["soap:Body"]?.children?.[0]?.[
-  //     "WSI4_PointRelais_RechercheResponse"
-  //   ]?.children?.[0]?.["WSI4_PointRelais_RechercheResult"]?.children[0];
-
   return (
     <div className="relative h-full min-h-[420px] overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] flex items-start justify-between p-4 md:p-5">
@@ -63,6 +59,16 @@ export default function Map({ results }: { results: any }) {
                     <div className="map-popup">
                       <h3>{pointRelais.name}</h3>
                       <p>{pointRelais.address}</p>
+                      {Object.entries(pointRelais.hours).map(
+                        ([day, schedule]) => {
+                          return (
+                            <div key={day}>
+                              {daysOfWeek[day] ?? day} :{" "}
+                              {formatDayLabel(schedule)}
+                            </div>
+                          );
+                        },
+                      )}
                     </div>
                   </Popup>
                 </Marker>

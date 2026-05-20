@@ -29,8 +29,16 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), sans-serif;
   background-image:
-    radial-gradient(circle at top left, rgba(161, 23, 60, 0.18), transparent 34%),
-    radial-gradient(circle at right 20%, rgba(242, 193, 78, 0.18), transparent 24%),
+    radial-gradient(
+      circle at top left,
+      rgba(161, 23, 60, 0.18),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at right 20%,
+      rgba(242, 193, 78, 0.18),
+      transparent 24%
+    ),
     linear-gradient(180deg, #fbf5ef 0%, #f4ede7 100%);
 }
 
@@ -98,4 +106,12 @@ a {
   color: var(--text-muted);
   font-size: 0.82rem;
   line-height: 1.45;
+}
+
+.ferme {
+  border-color: red;
+}
+
+.ouvert {
+  border-color: green;
 }

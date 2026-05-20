@@ -8,6 +8,11 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { convertXML } from "simple-xml-to-json";
 
+const Map = dynamic(() => import("@/components/Map"), {
+  loading: () => <p>A map is loading</p>,
+  ssr: false,
+});
+
 export default function Home() {
   const [results, setResults] = useState("");
 
@@ -18,11 +23,6 @@ export default function Home() {
       ?.children?.[0]?.["WSI4_PointRelais_RechercheResponse"]?.children?.[0]?.[
       "WSI4_PointRelais_RechercheResult"
     ]?.children[0] || [];
-
-  const Map = dynamic(() => import("@/components/Map"), {
-    loading: () => <p>A map is loading</p>,
-    ssr: false,
-  });
 
   return (
     <main className="app-shell min-h-screen p-4 md:p-6">
